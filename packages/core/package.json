@@ -2,6 +2,15 @@
   "name": "@ghostagent/core",
   "version": "0.1.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anthonybautista-gauntlet/ghostagent.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/anthonybautista-gauntlet/ghostagent/tree/main/packages/core#readme",
+  "bugs": {
+    "url": "https://github.com/anthonybautista-gauntlet/ghostagent/issues"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {

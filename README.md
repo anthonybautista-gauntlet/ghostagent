@@ -42,5 +42,5 @@ npm run pack:evals
 
 ## Notes
 
-- `verify:pack` is scaffolded but currently a placeholder (`scripts/verify-pack.mjs`).
+- `verify:pack` now validates packed tarballs by installing them into a temporary scratch project and running smoke checks.
 - This repo intentionally avoids client-side credential handling; eval and model keys must be provided server-side or via process environment.
