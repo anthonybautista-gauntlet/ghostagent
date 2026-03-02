@@ -16,7 +16,9 @@ export default defineConfig({
     'runners/run-ghostagent-replay-run': 'src/lib/run-ghostagent-replay-run.ts',
     'runners/run-ghostagent-rubric': 'src/lib/run-ghostagent-rubric.ts',
     'runners/run-ghostagent-scenarios': 'src/lib/run-ghostagent-scenarios.ts',
-    'runners/run-ghostagent-variants': 'src/lib/run-ghostagent-variants.ts'
+    'runners/run-ghostagent-variants': 'src/lib/run-ghostagent-variants.ts',
+    'scorers/ghostagent-scorer': 'src/lib/scorers/ghostagent-scorer.ts',
+    'staged/load-yaml': 'src/lib/staged/load-yaml.ts'
   },
   format: ['esm'],
   outDir: 'dist',

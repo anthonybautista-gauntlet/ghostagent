@@ -11,6 +11,11 @@ const execFileAsync = promisify(execFile);
 const scriptPath = fileURLToPath(import.meta.url);
 const workspaceRoot = resolve(scriptPath, '..', '..');
 
+function toTarballFileName({ name, version }) {
+  const normalizedName = name.replace('@', '').replace('/', '-');
+  return `${normalizedName}-${version}.tgz`;
+}
+
 async function assertFileExists(path, description) {
   try {
     await access(path, constants.F_OK);
@@ -73,11 +78,25 @@ async function verifyUiPackageFiles({ scratchDirectoryPath }) {
   );
 }
 
+async function readPackageManifest({ relativePath }) {
+  const packageJsonPath = resolve(workspaceRoot, relativePath, 'package.json');
+  const packageJson = JSON.parse(await readFile(packageJsonPath, 'utf8'));
+  return {
+    name: packageJson.name,
+    version: packageJson.version
+  };
+}
+
 async function main() {
+  const corePackage = await readPackageManifest({ relativePath: 'packages/core' });
+  const uiPackage = await readPackageManifest({ relativePath: 'packages/ui' });
+  const evalsPackage = await readPackageManifest({
+    relativePath: 'packages/evals'
+  });
   const tarballs = [
-    'ghost_agent-core-0.1.0.tgz',
-    'ghost_agent-ui-0.1.0.tgz',
-    'ghost_agent-evals-0.1.0.tgz'
+    toTarballFileName(corePackage),
+    toTarballFileName(uiPackage),
+    toTarballFileName(evalsPackage)
   ];
 
   for (const tarball of tarballs) {
@@ -102,9 +121,9 @@ async function main() {
       command: 'npm',
       args: [
         'install',
-        resolve(workspaceRoot, 'ghost_agent-core-0.1.0.tgz'),
-        resolve(workspaceRoot, 'ghost_agent-ui-0.1.0.tgz'),
-        resolve(workspaceRoot, 'ghost_agent-evals-0.1.0.tgz')
+        resolve(workspaceRoot, toTarballFileName(corePackage)),
+        resolve(workspaceRoot, toTarballFileName(uiPackage)),
+        resolve(workspaceRoot, toTarballFileName(evalsPackage))
       ],
       cwd: scratchDirectoryPath
     });
@@ -117,6 +136,10 @@ async function main() {
     await runNodeImport({
       cwd: scratchDirectoryPath,
       specifier: '@ghost_agent/evals/runners/run-eval-dataset'
+    });
+    await runNodeImport({
+      cwd: scratchDirectoryPath,
+      specifier: '@ghost_agent/evals/runners/run-ghostagent-golden-deterministic'
     });
 
     await assertFileExists(
@@ -179,6 +202,18 @@ async function main() {
         'ghostagent-eval-cases.json'
       ),
       '@ghost_agent/evals dataset asset'
+    );
+    await assertFileExists(
+      resolve(
+        scratchDirectoryPath,
+        'node_modules',
+        '@ghost_agent',
+        'evals',
+        'dist',
+        'scorers',
+        'ghostagent-scorer.js'
+      ),
+      '@ghost_agent/evals scorer runtime module'
     );
 
     await verifyUiPackageFiles({ scratchDirectoryPath });

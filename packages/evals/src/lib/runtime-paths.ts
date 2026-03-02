@@ -3,26 +3,10 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const libDirectoryPath = dirname(fileURLToPath(import.meta.url));
+const parentDirectoryPath = resolve(libDirectoryPath, '..');
 
-function resolveLibRootPath() {
-  const hasSiblingAssets =
-    existsSync(resolve(libDirectoryPath, 'staged')) &&
-    existsSync(resolve(libDirectoryPath, 'dataset'));
-
-  if (hasSiblingAssets) {
-    return libDirectoryPath;
-  }
-
-  const parentDirectoryPath = resolve(libDirectoryPath, '..');
-  const hasParentAssets =
-    existsSync(resolve(parentDirectoryPath, 'staged')) &&
-    existsSync(resolve(parentDirectoryPath, 'dataset'));
-
-  if (hasParentAssets) {
-    return parentDirectoryPath;
-  }
-
-  return libDirectoryPath;
+function findFirstExistingPath(paths: string[]) {
+  return paths.find((path) => existsSync(path));
 }
 
 export function resolveEvalHistoryDirectoryPath() {
@@ -43,8 +27,12 @@ export function resolvePathFromLib({
     return resolve(process.cwd(), overridePath);
   }
 
-  const libRootPath = resolveLibRootPath();
-  return resolve(libRootPath, pathFromLib);
+  const selectedPath = findFirstExistingPath([
+    resolve(libDirectoryPath, pathFromLib),
+    resolve(parentDirectoryPath, pathFromLib)
+  ]);
+
+  return selectedPath ?? resolve(libDirectoryPath, pathFromLib);
 }
 
 export function resolveModuleUrlFromLib({
@@ -52,16 +40,23 @@ export function resolveModuleUrlFromLib({
 }: {
   modulePathFromLibWithoutExtension: string;
 }) {
-  const libRootPath = resolveLibRootPath();
-  const candidatePaths = [
-    resolve(libDirectoryPath, `${modulePathFromLibWithoutExtension}.ts`),
-    resolve(libDirectoryPath, `${modulePathFromLibWithoutExtension}.js`),
-    resolve(libRootPath, `${modulePathFromLibWithoutExtension}.ts`),
-    resolve(libRootPath, `${modulePathFromLibWithoutExtension}.js`),
-    resolve(libRootPath, 'runners', `${modulePathFromLibWithoutExtension}.ts`),
-    resolve(libRootPath, 'runners', `${modulePathFromLibWithoutExtension}.js`)
+  const candidateDirectories = [
+    libDirectoryPath,
+    parentDirectoryPath,
+    resolve(libDirectoryPath, 'runners'),
+    resolve(parentDirectoryPath, 'runners'),
+    resolve(libDirectoryPath, 'scorers'),
+    resolve(parentDirectoryPath, 'scorers'),
+    resolve(libDirectoryPath, 'staged'),
+    resolve(parentDirectoryPath, 'staged'),
+    resolve(libDirectoryPath, 'dataset'),
+    resolve(parentDirectoryPath, 'dataset')
   ];
-  const selectedPath = candidatePaths.find((path) => existsSync(path));
+  const candidatePaths = candidateDirectories.flatMap((directoryPath) => [
+    resolve(directoryPath, `${modulePathFromLibWithoutExtension}.js`),
+    resolve(directoryPath, `${modulePathFromLibWithoutExtension}.ts`)
+  ]);
+  const selectedPath = findFirstExistingPath(candidatePaths);
 
   if (!selectedPath) {
     throw new Error(
