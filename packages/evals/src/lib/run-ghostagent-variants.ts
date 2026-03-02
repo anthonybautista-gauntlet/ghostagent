@@ -63,7 +63,7 @@ async function run() {
   }
 
   const loadYamlModuleUrl = resolveModuleUrlFromLib({
-    modulePathFromLibWithoutExtension: 'staged/load-yaml'
+    modulePathFromLibWithoutExtension: 'runtime/load-yaml'
   });
   const { loadYamlFile } = (await import(loadYamlModuleUrl)) as {
     loadYamlFile: <T>(args: { path: string }) => Promise<T>;

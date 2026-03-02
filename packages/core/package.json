@@ -1,6 +1,6 @@
 {
   "name": "@ghost_agent/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "repository": {
     "type": "git",
@@ -11,7 +11,8 @@
   "bugs": {
     "url": "https://github.com/anthonybautista-gauntlet/ghostagent/issues"
   },
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
     "ghostagent": "./bin/ghostagent-init.mjs"
@@ -19,7 +20,8 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
     "./bin/ghostagent-init.mjs": "./bin/ghostagent-init.mjs",
     "./prisma/*": "./prisma/*",

@@ -6,7 +6,12 @@ export default defineConfig({
   entry: {
     index: 'src/lib/index.ts'
   },
-  format: ['esm'],
+  format: ['esm', 'cjs'],
+  outExtension({ format }) {
+    return {
+      js: format === 'cjs' ? '.cjs' : '.js'
+    };
+  },
   outDir: 'dist',
   sourcemap: true,
   target: 'es2022',

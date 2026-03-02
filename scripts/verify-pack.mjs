@@ -129,6 +129,14 @@ async function main() {
     });
 
     await runNodeImport({ cwd: scratchDirectoryPath, specifier: '@ghost_agent/core' });
+    await runCommand({
+      command: 'node',
+      args: [
+        '-e',
+        "require('@ghost_agent/core'); console.log('core require ok');"
+      ],
+      cwd: scratchDirectoryPath
+    });
     await runNodeImport({
       cwd: scratchDirectoryPath,
       specifier: '@ghost_agent/evals'
@@ -214,6 +222,18 @@ async function main() {
         'ghostagent-scorer.js'
       ),
       '@ghost_agent/evals scorer runtime module'
+    );
+    await assertFileExists(
+      resolve(
+        scratchDirectoryPath,
+        'node_modules',
+        '@ghost_agent',
+        'evals',
+        'dist',
+        'runtime',
+        'load-yaml.js'
+      ),
+      '@ghost_agent/evals runtime load-yaml module'
     );
 
     await verifyUiPackageFiles({ scratchDirectoryPath });

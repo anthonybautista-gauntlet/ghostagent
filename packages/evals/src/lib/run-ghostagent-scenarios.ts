@@ -51,7 +51,7 @@ async function run() {
     modulePathFromLibWithoutExtension: 'run-eval-dataset'
   });
   const loadYamlModuleUrl = resolveModuleUrlFromLib({
-    modulePathFromLibWithoutExtension: 'staged/load-yaml'
+    modulePathFromLibWithoutExtension: 'runtime/load-yaml'
   });
   const { runEvalDataset } = (await import(evalDatasetModuleUrl)) as {
     runEvalDataset: (args: {
