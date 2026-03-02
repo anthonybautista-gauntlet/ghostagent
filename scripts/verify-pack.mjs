@@ -42,7 +42,7 @@ async function verifyUiPackageFiles({ scratchDirectoryPath }) {
   const uiPackagePath = resolve(
     scratchDirectoryPath,
     'node_modules',
-    '@ghostagent',
+    '@ghost_agent',
     'ui',
     'package.json'
   );
@@ -53,31 +53,31 @@ async function verifyUiPackageFiles({ scratchDirectoryPath }) {
 
   if (!typesPath || !defaultPath) {
     throw new Error(
-      'Invalid @ghostagent/ui exports. Expected "." to include both "types" and "default" conditions.'
+      'Invalid @ghost_agent/ui exports. Expected "." to include both "types" and "default" conditions.'
     );
   }
 
   await assertFileExists(
-    resolve(scratchDirectoryPath, 'node_modules', '@ghostagent', 'ui', typesPath),
-    '@ghostagent/ui type declaration target'
+    resolve(scratchDirectoryPath, 'node_modules', '@ghost_agent', 'ui', typesPath),
+    '@ghost_agent/ui type declaration target'
   );
   await assertFileExists(
     resolve(
       scratchDirectoryPath,
       'node_modules',
-      '@ghostagent',
+      '@ghost_agent',
       'ui',
       defaultPath
     ),
-    '@ghostagent/ui module target'
+    '@ghost_agent/ui module target'
   );
 }
 
 async function main() {
   const tarballs = [
-    'ghostagent-core-0.1.0.tgz',
-    'ghostagent-ui-0.1.0.tgz',
-    'ghostagent-evals-0.1.0.tgz'
+    'ghost_agent-core-0.1.0.tgz',
+    'ghost_agent-ui-0.1.0.tgz',
+    'ghost_agent-evals-0.1.0.tgz'
   ];
 
   for (const tarball of tarballs) {
@@ -102,50 +102,50 @@ async function main() {
       command: 'npm',
       args: [
         'install',
-        resolve(workspaceRoot, 'ghostagent-core-0.1.0.tgz'),
-        resolve(workspaceRoot, 'ghostagent-ui-0.1.0.tgz'),
-        resolve(workspaceRoot, 'ghostagent-evals-0.1.0.tgz')
+        resolve(workspaceRoot, 'ghost_agent-core-0.1.0.tgz'),
+        resolve(workspaceRoot, 'ghost_agent-ui-0.1.0.tgz'),
+        resolve(workspaceRoot, 'ghost_agent-evals-0.1.0.tgz')
       ],
       cwd: scratchDirectoryPath
     });
 
-    await runNodeImport({ cwd: scratchDirectoryPath, specifier: '@ghostagent/core' });
+    await runNodeImport({ cwd: scratchDirectoryPath, specifier: '@ghost_agent/core' });
     await runNodeImport({
       cwd: scratchDirectoryPath,
-      specifier: '@ghostagent/evals'
+      specifier: '@ghost_agent/evals'
     });
     await runNodeImport({
       cwd: scratchDirectoryPath,
-      specifier: '@ghostagent/evals/runners/run-eval-dataset'
+      specifier: '@ghost_agent/evals/runners/run-eval-dataset'
     });
 
     await assertFileExists(
       resolve(
         scratchDirectoryPath,
         'node_modules',
-        '@ghostagent',
+        '@ghost_agent',
         'core',
         'bin',
         'ghostagent-init.mjs'
       ),
-      '@ghostagent/core CLI binary'
+      '@ghost_agent/core CLI binary'
     );
     await assertFileExists(
       resolve(
         scratchDirectoryPath,
         'node_modules',
-        '@ghostagent',
+        '@ghost_agent',
         'core',
         'prisma',
         'schema.chat-session.prisma'
       ),
-      '@ghostagent/core prisma asset'
+      '@ghost_agent/core prisma asset'
     );
     await assertFileExists(
       resolve(
         scratchDirectoryPath,
         'node_modules',
-        '@ghostagent',
+        '@ghost_agent',
         'core',
         'scaffolds',
         'api',
@@ -153,32 +153,32 @@ async function main() {
         'ai',
         'ai.module.ts'
       ),
-      '@ghostagent/core scaffold asset'
+      '@ghost_agent/core scaffold asset'
     );
 
     await assertFileExists(
       resolve(
         scratchDirectoryPath,
         'node_modules',
-        '@ghostagent',
+        '@ghost_agent',
         'evals',
         'dist',
         'staged',
         'scenarios.yaml'
       ),
-      '@ghostagent/evals staged scenarios asset'
+      '@ghost_agent/evals staged scenarios asset'
     );
     await assertFileExists(
       resolve(
         scratchDirectoryPath,
         'node_modules',
-        '@ghostagent',
+        '@ghost_agent',
         'evals',
         'dist',
         'dataset',
         'ghostagent-eval-cases.json'
       ),
-      '@ghostagent/evals dataset asset'
+      '@ghost_agent/evals dataset asset'
     );
 
     await verifyUiPackageFiles({ scratchDirectoryPath });

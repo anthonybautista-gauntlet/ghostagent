@@ -1,4 +1,4 @@
-# @ghostagent/ui
+# @ghost_agent/ui
 
 Angular UI package for GhostAgent chat integration.
 

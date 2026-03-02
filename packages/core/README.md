@@ -1,4 +1,4 @@
-# @ghostagent/core
+# @ghost_agent/core
 
 Core backend package for GhostAgent extraction.
 

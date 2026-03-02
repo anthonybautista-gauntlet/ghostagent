@@ -1,7 +1,7 @@
 # GhostAgent Core Prisma Assets
 
 This directory keeps the database assets required for Ghost Agent chat persistence
-in `@ghostagent/core` so host apps do not need a separate adapter package.
+in `@ghost_agent/core` so host apps do not need a separate adapter package.
 
 ## Included assets
 
@@ -21,7 +21,7 @@ in `@ghostagent/core` so host apps do not need a separate adapter package.
    - `chatSessions ChatSession[]`
    - `aiFeedback AiFeedback[]`
 3. Apply the SQL migrations in your host migration pipeline.
-4. Wire your host `PrismaSessionStore` implementation to `@ghostagent/core`
+4. Wire your host `PrismaSessionStore` implementation to `@ghost_agent/core`
    `AgentSessionStore` contract.
 
 Scaffold shortcut:
@@ -31,5 +31,5 @@ Scaffold shortcut:
 
 ## Why this lives in core
 
-`@ghostagent/core` remains runtime-agnostic, but ships official persistence assets
+`@ghost_agent/core` remains runtime-agnostic, but ships official persistence assets
 so the host can enable full chat history without additional packages.

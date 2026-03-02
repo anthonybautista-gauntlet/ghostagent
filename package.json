@@ -15,13 +15,13 @@
     "packages/*"
   ],
   "scripts": {
-    "build:core": "npm run build -w @ghostagent/core",
-    "build:ui": "npm run build -w @ghostagent/ui",
-    "build:evals": "npm run build -w @ghostagent/evals",
+    "build:core": "npm run build -w @ghost_agent/core",
+    "build:ui": "npm run build -w @ghost_agent/ui",
+    "build:evals": "npm run build -w @ghost_agent/evals",
     "build": "npm run build:core && npm run build:ui && npm run build:evals",
-    "pack:core": "npm pack -w @ghostagent/core",
-    "pack:ui": "npm pack -w @ghostagent/ui",
-    "pack:evals": "npm pack -w @ghostagent/evals",
+    "pack:core": "npm pack -w @ghost_agent/core",
+    "pack:ui": "npm pack -w @ghost_agent/ui",
+    "pack:evals": "npm pack -w @ghost_agent/evals",
     "verify:pack": "node ./scripts/verify-pack.mjs"
   },
   "devDependencies": {

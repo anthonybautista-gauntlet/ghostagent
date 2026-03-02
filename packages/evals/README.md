@@ -1,4 +1,4 @@
-# @ghostagent/evals
+# @ghost_agent/evals
 
 Evaluation package for GhostAgent with programmatic APIs, runner entrypoints, and staged assets.
 
@@ -13,7 +13,7 @@ Public entrypoint: `src/lib/index.ts`
 
 Deep export for runner modules:
 
-- `@ghostagent/evals/runners/*`
+- `@ghost_agent/evals/runners/*`
 
 These map to built files under `dist/runners/*`.
 
@@ -27,7 +27,7 @@ The build process copies staged and dataset assets from `src/lib` into `dist`.
 ## Running evals programmatically
 
 ```ts
-import { runEvalDataset } from '@ghostagent/evals';
+import { runEvalDataset } from '@ghost_agent/evals';
 
 const result = await runEvalDataset();
 console.log(result.report);

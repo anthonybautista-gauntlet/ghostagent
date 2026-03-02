@@ -2,9 +2,9 @@
 
 This repository contains the extracted GhostAgent packages intended for npm publishing:
 
-- `@ghostagent/core` - backend orchestration utilities, contracts, verifier, and init scaffolding assets.
-- `@ghostagent/ui` - Angular chat UI component and API client token contract.
-- `@ghostagent/evals` - eval runner library, scorer, dataset, and staged eval assets.
+- `@ghost_agent/core` - backend orchestration utilities, contracts, verifier, and init scaffolding assets.
+- `@ghost_agent/ui` - Angular chat UI component and API client token contract.
+- `@ghost_agent/evals` - eval runner library, scorer, dataset, and staged eval assets.
 
 ## Requirements
 

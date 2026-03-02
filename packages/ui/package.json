@@ -1,5 +1,5 @@
 {
-  "name": "@ghostagent/ui",
+  "name": "@ghost_agent/ui",
   "version": "0.1.0",
   "type": "module",
   "repository": {
@@ -11,14 +11,14 @@
   "bugs": {
     "url": "https://github.com/anthonybautista-gauntlet/ghostagent/issues"
   },
-  "main": "./dist/fesm2022/ghostagent-ui.mjs",
-  "module": "./dist/fesm2022/ghostagent-ui.mjs",
-  "types": "./dist/types/ghostagent-ui.d.ts",
+  "main": "./dist/fesm2022/ghost_agent-ui.mjs",
+  "module": "./dist/fesm2022/ghost_agent-ui.mjs",
+  "types": "./dist/types/ghost_agent-ui.d.ts",
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./dist/types/ghostagent-ui.d.ts",
-      "default": "./dist/fesm2022/ghostagent-ui.mjs"
+      "types": "./dist/types/ghost_agent-ui.d.ts",
+      "default": "./dist/fesm2022/ghost_agent-ui.mjs"
     }
   },
   "files": [
