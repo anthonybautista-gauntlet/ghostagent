@@ -1,0 +1,29 @@
+{
+  "name": "@ghostagent/evals",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./runners/*": {
+      "types": "./dist/runners/*.d.ts",
+      "import": "./dist/runners/*.js"
+    },
+    "./staged/*": "./dist/staged/*",
+    "./dataset/*": "./dist/dataset/*"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "dependencies": {
+    "yaml": "^2"
+  },
+  "scripts": {
+    "build": "tsup --config tsup.config.ts && node ./scripts/copy-runtime-assets.mjs"
+  }
+}

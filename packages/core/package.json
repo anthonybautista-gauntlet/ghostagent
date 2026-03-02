@@ -1,0 +1,32 @@
+{
+  "name": "@ghostagent/core",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "ghostagent": "./bin/ghostagent-init.mjs"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./bin/ghostagent-init.mjs": "./bin/ghostagent-init.mjs",
+    "./prisma/*": "./prisma/*",
+    "./scaffolds/*": "./scaffolds/*"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "prisma",
+    "scaffolds",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "@nestjs/common": "^11"
+  },
+  "scripts": {
+    "build": "tsup --config tsup.config.ts"
+  }
+}

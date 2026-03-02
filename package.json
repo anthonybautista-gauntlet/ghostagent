@@ -1,0 +1,28 @@
+{
+  "name": "ghostagent-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build:core": "npm run build -w @ghostagent/core",
+    "build:ui": "npm run build -w @ghostagent/ui",
+    "build:evals": "npm run build -w @ghostagent/evals",
+    "build": "npm run build:core && npm run build:ui && npm run build:evals",
+    "pack:core": "npm pack -w @ghostagent/core",
+    "pack:ui": "npm pack -w @ghostagent/ui",
+    "pack:evals": "npm pack -w @ghostagent/evals",
+    "verify:pack": "node ./scripts/verify-pack.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}
